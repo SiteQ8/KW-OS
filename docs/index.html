@@ -4,25 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="KW-OS — Kuwait Open Source Directory. Discover open-source tools built by Kuwaiti developers 🇰🇼">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🇰🇼</text></svg>">
 <title>KW-OS | Kuwait Open Source Directory</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
 --bg:#f8faf9;--bg2:#edf2ef;--surface:#ffffff;--text:#0f2318;--text2:#4a6355;--text3:#8a9f92;
---green:#007a3d;--green2:#00a651;--green-dim:#007a3d10;--red:#c41a1a;--gold:#c49b1a;
+--green:#2563eb;--green2:#3b82f6;--green-dim:#2563eb10;--red:#c41a1a;--gold:#c49b1a;
 --blue:#2563eb;--purple:#7c3aed;--cyan:#0891b2;--orange:#ea580c;
 --border:#d4e0d8;--radius:12px;--shadow:0 2px 12px rgba(15,35,24,0.06);
 --font:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace;
 }
 html[data-theme="dark"]{
 --bg:#0a1510;--bg2:#0f1f16;--surface:#142820;--text:#e0ece5;--text2:#8aab97;--text3:#5a7a66;
---border:#1e3a2c;--shadow:0 2px 12px rgba(0,0,0,0.2);--green-dim:#007a3d18;
+--border:#1e3a2c;--shadow:0 2px 12px rgba(0,0,0,0.2);--green-dim:#2563eb18;
 }
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;transition:all .3s}
 
 /* Header */
-.header{background:linear-gradient(135deg,#003820 0%,var(--green) 50%,#005c2e 100%);color:#fff;padding:48px 24px 36px;text-align:center;position:relative;overflow:hidden}
+.header{background:linear-gradient(135deg,#0f1d4d 0%,#2563eb 50%,#1e40af 100%);color:#fff;padding:48px 24px 36px;text-align:center;position:relative;overflow:hidden}
 .header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.3' opacity='0.07'%3E%3Crect x='5' y='5' width='30' height='30' rx='4'/%3E%3Ccircle cx='20' cy='20' r='8'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
 .header h1{font-size:2.2rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:4px;position:relative}
 .header h1 .flag{font-size:1.6rem}
@@ -96,7 +97,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .section-title::after{content:'';flex:1;height:1px;background:var(--border)}
 
 /* CTA */
-.cta{background:linear-gradient(135deg,var(--green),#005c2e);color:#fff;border-radius:var(--radius);padding:32px;text-align:center;margin:32px 0}
+.cta{background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;border-radius:var(--radius);padding:32px;text-align:center;margin:32px 0}
 .cta h3{font-size:1.3rem;margin-bottom:8px}
 .cta p{font-size:0.9rem;opacity:0.85;margin-bottom:16px}
 .cta-btn{display:inline-block;padding:10px 24px;border-radius:10px;background:#fff;color:var(--green);font-weight:700;font-size:0.9rem;text-decoration:none;transition:all .2s}
@@ -121,7 +122,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 <body>
 <div class="header">
     <h1><span class="flag">🇰🇼</span> KW-OS</h1>
-    <div class="header-sub">Kuwait Open Source Directory — Discover tools built by Kuwaiti developers</div>
+    <div class="header-sub">Kuwait Open Source Directory — 266 projects from 177 developers 🇰🇼</div>
     <div class="header-stats">
         <div class="hstat"><div class="hstat-num" id="h-projects">0</div><div class="hstat-label">Projects</div></div>
         <div class="hstat"><div class="hstat-num" id="h-categories">0</div><div class="hstat-label">Categories</div></div>
