@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="KW-OS — Kuwait Open Source Directory. Discover open-source tools built by Kuwaiti developers 🇰🇼">
+<title>KW-OS | Kuwait Open Source Directory</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#f8faf9;--bg2:#edf2ef;--surface:#ffffff;--text:#0f2318;--text2:#4a6355;--text3:#8a9f92;
+--green:#007a3d;--green2:#00a651;--green-dim:#007a3d10;--red:#c41a1a;--gold:#c49b1a;
+--blue:#2563eb;--purple:#7c3aed;--cyan:#0891b2;--orange:#ea580c;
+--border:#d4e0d8;--radius:12px;--shadow:0 2px 12px rgba(15,35,24,0.06);
+--font:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+html[data-theme="dark"]{
+--bg:#0a1510;--bg2:#0f1f16;--surface:#142820;--text:#e0ece5;--text2:#8aab97;--text3:#5a7a66;
+--border:#1e3a2c;--shadow:0 2px 12px rgba(0,0,0,0.2);--green-dim:#007a3d18;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;transition:all .3s}
+
+/* Header */
+.header{background:linear-gradient(135deg,#003820 0%,var(--green) 50%,#005c2e 100%);color:#fff;padding:48px 24px 36px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.3' opacity='0.07'%3E%3Crect x='5' y='5' width='30' height='30' rx='4'/%3E%3Ccircle cx='20' cy='20' r='8'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.header h1{font-size:2.2rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:4px;position:relative}
+.header h1 .flag{font-size:1.6rem}
+.header-sub{font-size:0.95rem;opacity:0.8;margin-bottom:16px;position:relative}
+.header-stats{display:flex;justify-content:center;gap:24px;margin-top:12px;position:relative}
+.hstat{text-align:center}
+.hstat-num{font-size:1.8rem;font-weight:700}
+.hstat-label{font-size:0.7rem;opacity:0.7;text-transform:uppercase;letter-spacing:0.5px}
+.header-actions{display:flex;justify-content:center;gap:8px;margin-top:16px;position:relative}
+.hbtn{background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:7px 16px;border-radius:8px;cursor:pointer;font-family:var(--font);font-size:0.78rem;font-weight:500;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.hbtn:hover{background:rgba(255,255,255,0.24)}
+.hbtn svg{width:14px;height:14px;fill:currentColor}
+
+.container{max-width:1200px;margin:0 auto;padding:0 16px}
+
+/* Search + Filter Bar */
+.toolbar{position:sticky;top:0;z-index:100;background:var(--bg);padding:12px 0;transition:background .3s}
+.toolbar-inner{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.search-box{flex:1;min-width:200px;padding:10px 16px 10px 40px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font);font-size:0.9rem;background:var(--surface);color:var(--text);outline:none;transition:border-color .2s}
+.search-box:focus{border-color:var(--green)}
+.search-wrap{position:relative;flex:1;min-width:200px}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none}
+.filter-select{padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font);font-size:0.85rem;background:var(--surface);color:var(--text);cursor:pointer}
+.sort-select{padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font);font-size:0.85rem;background:var(--surface);color:var(--text);cursor:pointer}
+
+/* Category pills */
+.pills{display:flex;gap:6px;overflow-x:auto;padding:8px 0 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.pills::-webkit-scrollbar{display:none}
+.pill{white-space:nowrap;padding:6px 14px;border-radius:100px;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);font-size:0.75rem;font-weight:600;cursor:pointer;transition:all .2s;flex-shrink:0;font-family:var(--font)}
+.pill.active{background:var(--green);color:#fff;border-color:var(--green)}
+.pill:hover:not(.active){border-color:var(--green2);color:var(--green)}
+.pill-count{font-weight:400;opacity:0.7;margin-left:3px}
+
+/* Project Grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;padding-bottom:40px}
+@media(max-width:720px){.grid{grid-template-columns:1fr}}
+
+/* Project Card */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all .2s;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.card:hover{box-shadow:var(--shadow);border-color:var(--green);transform:translateY(-2px)}
+.card-top{display:flex;align-items:start;gap:12px;margin-bottom:12px}
+.card-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.card-icon.cyber{background:#ef444415;color:#ef4444}
+.card-icon.compliance{background:#3b82f615;color:#3b82f6}
+.card-icon.islamic{background:#007a3d15;color:#007a3d}
+.card-icon.security{background:#7c3aed15;color:#7c3aed}
+.card-icon.infra{background:#0891b215;color:#0891b2}
+.card-icon.community{background:#ea580c15;color:#ea580c}
+.card-icon.data{background:#c49b1a15;color:#c49b1a}
+.card-info{flex:1;min-width:0}
+.card-name{font-size:1rem;font-weight:700;margin-bottom:2px;color:var(--text)}
+.card-author{font-size:0.72rem;color:var(--text3);font-family:var(--mono)}
+.card-desc{font-size:0.84rem;color:var(--text2);line-height:1.6;margin-bottom:12px;flex:1}
+.card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+.tag{padding:2px 8px;border-radius:100px;font-size:0.65rem;font-weight:600;background:var(--green-dim);color:var(--green);font-family:var(--mono)}
+.card-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:10px;margin-top:auto}
+.card-meta{display:flex;gap:12px;font-size:0.72rem;color:var(--text3)}
+.card-meta span{display:flex;align-items:center;gap:3px}
+.card-link{padding:5px 14px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-family:var(--font);font-size:0.75rem;font-weight:600;text-decoration:none;transition:all .15s}
+.card-link:hover{border-color:var(--green);color:var(--green)}
+
+/* Stats section */
+.stats-section{padding:32px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center}
+.stat-card-num{font-size:2rem;font-weight:700;color:var(--green)}
+.stat-card-label{font-size:0.75rem;color:var(--text3);margin-top:4px}
+
+/* Section title */
+.section-title{font-size:0.78rem;font-weight:700;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin:24px 0 12px;display:flex;align-items:center;gap:8px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* CTA */
+.cta{background:linear-gradient(135deg,var(--green),#005c2e);color:#fff;border-radius:var(--radius);padding:32px;text-align:center;margin:32px 0}
+.cta h3{font-size:1.3rem;margin-bottom:8px}
+.cta p{font-size:0.9rem;opacity:0.85;margin-bottom:16px}
+.cta-btn{display:inline-block;padding:10px 24px;border-radius:10px;background:#fff;color:var(--green);font-weight:700;font-size:0.9rem;text-decoration:none;transition:all .2s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.15)}
+
+/* Footer */
+.footer{text-align:center;padding:32px 16px;font-size:0.78rem;color:var(--text3);border-top:1px solid var(--border)}
+.footer a{color:var(--green);text-decoration:none}
+
+/* Empty */
+.empty{text-align:center;padding:60px 20px;color:var(--text3)}
+.empty-icon{font-size:3rem;opacity:0.3;margin-bottom:12px}
+
+/* Toast */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;padding:10px 18px;border-radius:10px;font-size:0.82rem;font-weight:500;color:#fff;background:var(--green);z-index:10000;box-shadow:0 8px 24px rgba(0,0,0,0.2);animation:toastIn .3s ease-out,toastOut .3s ease-in 2s forwards}
+@keyframes toastIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes toastOut{from{opacity:1}to{opacity:0;transform:translateY(20px)}}
+
+@media(max-width:600px){.header h1{font-size:1.6rem}.header-stats{gap:16px}.hstat-num{font-size:1.4rem}}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1><span class="flag">🇰🇼</span> KW-OS</h1>
+    <div class="header-sub">Kuwait Open Source Directory — Discover tools built by Kuwaiti developers</div>
+    <div class="header-stats">
+        <div class="hstat"><div class="hstat-num" id="h-projects">0</div><div class="hstat-label">Projects</div></div>
+        <div class="hstat"><div class="hstat-num" id="h-categories">0</div><div class="hstat-label">Categories</div></div>
+        <div class="hstat"><div class="hstat-num" id="h-contributors">0</div><div class="hstat-label">Contributors</div></div>
+    </div>
+    <div class="header-actions">
+        <button class="hbtn" id="dark-btn" onclick="toggleDark()">🌙 Dark</button>
+        <a class="hbtn" href="https://github.com/SiteQ8/KW-OS" target="_blank">
+            <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            Star on GitHub
+        </a>
+        <a class="hbtn" href="https://github.com/SiteQ8/KW-OS/issues/new" target="_blank">➕ Submit Project</a>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <div class="toolbar-inner">
+            <div class="search-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-box" id="search" placeholder="Search projects, tools, authors..." oninput="render()">
+            </div>
+            <select class="filter-select" id="cat-filter" onchange="render()">
+                <option value="all">All Categories</option>
+            </select>
+            <select class="sort-select" id="sort-select" onchange="render()">
+                <option value="featured">Featured</option>
+                <option value="name">Name A-Z</option>
+                <option value="newest">Newest First</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Pills -->
+    <div class="pills" id="pills"></div>
+
+    <!-- Grid -->
+    <div class="grid" id="project-grid"></div>
+
+    <!-- CTA -->
+    <div class="cta">
+        <h3>🇰🇼 Built something open source in Kuwait?</h3>
+        <p>Submit your project to be featured in the KW-OS directory. Help grow the Kuwaiti open-source community.</p>
+        <a class="cta-btn" href="https://github.com/SiteQ8/KW-OS/issues/new?title=[NEW+PROJECT]&body=Project+Name:%0AGitHub+URL:%0ADescription:%0ACategory:" target="_blank">Submit Your Project →</a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>🇰🇼 KW-OS — Kuwait Open Source Directory</p>
+        <p>Curated by <a href="https://github.com/SiteQ8" target="_blank">@SiteQ8</a> — Ali AlEnezi</p>
+        <p style="margin-top:6px;opacity:0.6">Open source. Open community. Open Kuwait.</p>
+    </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// KW-OS PROJECT DATABASE
+// ═══════════════════════════════════════════════════════════════
+
+const CATEGORIES = [
+    {id:'all',label:'All',icon:'📦'},
+    {id:'cybersecurity',label:'Cybersecurity',icon:'🔐'},
+    {id:'compliance',label:'Compliance & GRC',icon:'📋'},
+    {id:'islamic',label:'Islamic Apps',icon:'🕌'},
+    {id:'security-ops',label:'Security Ops',icon:'🛡️'},
+    {id:'infrastructure',label:'Infrastructure',icon:'⚙️'},
+    {id:'community',label:'Community Tools',icon:'👥'},
+    {id:'data',label:'Data & Finance',icon:'📊'},
+    {id:'education',label:'Education',icon:'🎓'},
+];
+
+const PROJECTS = [
+    // ── @SiteQ8 — Ali AlEnezi ──────────────────────────────────
+    {name:'S7aba',desc:'Cloud Privilege Escalation & Post-Exploitation Framework. Pure Bash tool supporting AWS, Azure, GCP & Kubernetes with 14+ IAM escalation methods, lateral movement, persistence, and exfiltration modules.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/S7aba',cat:'cybersecurity',icon:'cyber',
+     tags:['bash','aws','azure','gcp','kubernetes','red-team','privesc'],lang:'Bash',stars:'★',featured:true,year:2026},
+
+    {name:'CORF Compliance Tool',desc:'Full-stack assessment tool for Kuwait Central Bank Cyber & Operational Resilience Framework (CORF) v1.0. 876 controls, 27 domains, PDF/Excel export, remediation tracker.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/corf-compliance-tool',cat:'compliance',icon:'compliance',
+     tags:['react','nodejs','sqlite','corf','cbk','kuwait','compliance'],lang:'JavaScript',stars:'★',featured:true,year:2026},
+
+    {name:'SAMA CSF Assessment',desc:'Bilingual (AR/EN) assessment tool for Saudi Central Bank Cybersecurity Framework. 4 domains, 114 sub-controls, 6 maturity levels, framework mappings to ISO/NIST/CIS/PCI/NCA.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/sama-csf-assessment',cat:'compliance',icon:'compliance',
+     tags:['sama','saudi','cybersecurity','bilingual','arabic','assessment'],lang:'HTML/JS',stars:'★',featured:true,year:2025},
+
+    {name:'Security Leadership Panel',desc:'CISO-grade cybersecurity governance dashboard aligned to NIST CSF 2.0 + CIS Controls v8. 6 modules: Dashboard, Frameworks, Metrics, Incidents, Vendor Risk, Planning.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/security-leadership-panel',cat:'security-ops',icon:'security',
+     tags:['nist-csf','cis-controls','ciso','dashboard','governance','chartjs'],lang:'HTML/JS',stars:'★',featured:true,year:2026},
+
+    {name:'TLS Cert Expiry Radar',desc:'Monitor SSL/TLS certificate expiry with interactive radar chart, doughnut chart, bar chart, global map, domain scanner, and dark mode. Zero-install browser app.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/tls-cert-expiry-radar',cat:'security-ops',icon:'security',
+     tags:['tls','ssl','certificates','monitoring','chartjs','leaflet','pwa'],lang:'HTML/JS',stars:'★',featured:true,year:2025},
+
+    {name:'Daily Ayah (آية اليوم)',desc:'Complete Holy Quran app — 114 surahs, 6,236 ayahs via AlQuran Cloud API. Uthmani script, Sahih International translation, surah browser, daily ayah rotation.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/daily-ayah',cat:'islamic',icon:'islamic',
+     tags:['quran','uthmani','arabic','bilingual','sahih-international','api'],lang:'HTML/JS',stars:'★',featured:true,year:2026},
+
+    {name:'Dua Collection (مجموعة الأدعية)',desc:'337+ authentic Islamic duas from Quran, Sunnah & Hisn al-Muslim. 20 categories, source citations, favorites, search, dark mode, mobile-first.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/duaarepo',cat:'islamic',icon:'islamic',
+     tags:['dua','islam','hadith','hisn-al-muslim','arabic','mobile-first'],lang:'HTML/JS',stars:'★',featured:true,year:2026},
+
+    {name:'CyberArsenal',desc:'Open-source cybersecurity tools platform cataloging 60+ tools across 12 categories. Searchable, filterable browser-based interface for security professionals.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/CyberArsenal',cat:'cybersecurity',icon:'cyber',
+     tags:['tools','catalog','offensive-security','defensive','osint','forensics'],lang:'HTML/JS',stars:'★',year:2026},
+
+    {name:'SecureArch',desc:'Browser-based security architecture design tool with drag-and-drop canvas, STRIDE threat modeling, and NIST/ISO/CIS compliance mapping.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/SecureArch',cat:'infrastructure',icon:'infra',
+     tags:['architecture','threat-modeling','stride','nist','iso27001','canvas'],lang:'HTML/JS',stars:'★',year:2026},
+
+    {name:'CyberStrategy Workbench',desc:'Strategic cybersecurity planning tool with 90-day roadmap planner, stakeholder matrix, policy builder, and executive brief generator.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/CyberStrategy-Workbench',cat:'security-ops',icon:'security',
+     tags:['strategy','planning','ciso','policy','executive','roadmap'],lang:'HTML/JS',stars:'★',year:2026},
+
+    {name:'OSINT Suite',desc:'Comprehensive OSINT framework (v2.0) with terminal-aesthetic React GUI. Multi-tool intelligence gathering for security researchers.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/osint-suite',cat:'cybersecurity',icon:'cyber',
+     tags:['osint','intelligence','reconnaissance','react','terminal-ui'],lang:'React',stars:'★',year:2026},
+
+    {name:'VulnScan Framework',desc:'Python ML-based vulnerability prediction framework covering 10 web attack categories. Machine learning models for vulnerability classification.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/VulnScan',cat:'cybersecurity',icon:'cyber',
+     tags:['python','machine-learning','vulnerability','scanner','ml','web-security'],lang:'Python',stars:'★',year:2026},
+
+    {name:'ICS/IoT/OT Security Framework',desc:'Industrial control systems security hardening framework aligned to IEC 62443, NIST SP 800-82, and NERC CIP standards.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/ics-iot-security',cat:'infrastructure',icon:'infra',
+     tags:['ics','iot','ot','scada','iec-62443','nist-800-82','nerc-cip'],lang:'Docs',stars:'★',year:2026},
+
+    {name:'SiteQ8 CyberToolkit',desc:'Modular bash cybersecurity toolkit for penetration testing, reconnaissance, and security assessments. Portable and dependency-light.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/CyberToolkit',cat:'cybersecurity',icon:'cyber',
+     tags:['bash','pentest','toolkit','recon','portable','modular'],lang:'Bash',stars:'★',year:2026},
+
+    {name:'AlEnezi CTF Tool',desc:'CTF toolkit (alenezi.sh) for Capture The Flag competitions. Mobile forensics, OSINT, web exploitation, and crypto challenges.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/alenezi-tool',cat:'cybersecurity',icon:'cyber',
+     tags:['ctf','forensics','osint','web-exploit','crypto','bash'],lang:'Bash',stars:'★',year:2026},
+
+    {name:'OpenShift Secure Architecture',desc:'Production-grade OpenShift security blueprint. PCI DSS v4.0, Zero Trust, CIS/NIST-aligned with interactive GUI for architecture design.',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/openshift-secure-arch',cat:'infrastructure',icon:'infra',
+     tags:['openshift','kubernetes','pci-dss','zero-trust','cis','nist'],lang:'HTML/JS',stars:'★',year:2026},
+
+    // ── Other Kuwaiti Developers & Projects ────────────────────
+    {name:'Amwal (Boursa Kuwait API)',desc:'Python library for getting information from the Kuwaiti stock market (Boursa Kuwait). Financial data scraping and analysis.',
+     author:'Community',url:'https://github.com/topics/kuwait',cat:'data',icon:'data',
+     tags:['python','finance','stock-market','boursa','kuwait','api'],lang:'Python',stars:'★',year:2024},
+
+    {name:'CIS Benchmark Checker (Kuwait Gov)',desc:'CIS Benchmark Compliance Checker designed for Kuwait Government Entities. Self-assessment tool for government cybersecurity standards.',
+     author:'Community',url:'https://github.com/topics/kuwait',cat:'compliance',icon:'compliance',
+     tags:['cis','government','kuwait','compliance','benchmark','security'],lang:'Various',stars:'★',year:2025},
+
+    {name:'Kuwait Prayer Times',desc:'Open-source prayer times calculation library with support for Kuwaiti calculation methods and timezone handling.',
+     author:'Community',url:'https://github.com/topics/kuwait',cat:'islamic',icon:'islamic',
+     tags:['prayer-times','islam','kuwait','calculation','mobile'],lang:'Various',stars:'★',year:2024},
+
+    {name:'Kuwait University Projects',desc:'Collection of open-source projects from Kuwait University students covering networking, ML, robotics, and computer science.',
+     author:'KU Students',url:'https://github.com/topics/kuwait-university',cat:'education',icon:'community',
+     tags:['university','students','networking','machine-learning','robotics'],lang:'Various',stars:'★',year:2025},
+
+    {name:'KW-OS Directory (This Project)',desc:'The Kuwait Open Source Directory itself — a curated catalog of open-source tools built by Kuwaiti developers. Submit your project!',
+     author:'SiteQ8',url:'https://github.com/SiteQ8/KW-OS',cat:'community',icon:'community',
+     tags:['directory','catalog','open-source','kuwait','community'],lang:'HTML/JS',stars:'★',featured:true,year:2026},
+];
+
+// ═══════════════════════════════════════════════════════════════
+// APP LOGIC
+// ═══════════════════════════════════════════════════════════════
+
+let activeCat = 'all';
+
+function toggleDark() {
+    const d = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', d ? '' : 'dark');
+    document.getElementById('dark-btn').textContent = d ? '🌙 Dark' : '☀️ Light';
+    try { localStorage.setItem('kwos-dark', d ? '' : 'dark'); } catch(e) {}
+}
+
+function renderPills() {
+    const el = document.getElementById('pills');
+    el.innerHTML = CATEGORIES.map(c => {
+        const count = c.id === 'all' ? PROJECTS.length : PROJECTS.filter(p => p.cat === c.id).length;
+        return `<button class="pill ${c.id === activeCat ? 'active' : ''}" onclick="activeCat='${c.id}';document.getElementById('cat-filter').value='${c.id}';render()">
+            ${c.icon} ${c.label} <span class="pill-count">(${count})</span>
+        </button>`;
+    }).join('');
+}
+
+function render() {
+    const q = document.getElementById('search').value.toLowerCase();
+    const cat = document.getElementById('cat-filter').value;
+    const sort = document.getElementById('sort-select').value;
+    activeCat = cat;
+
+    let filtered = [...PROJECTS];
+    if (cat !== 'all') filtered = filtered.filter(p => p.cat === cat);
+    if (q) filtered = filtered.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.desc.toLowerCase().includes(q) ||
+        p.author.toLowerCase().includes(q) ||
+        p.tags.some(t => t.includes(q))
+    );
+
+    if (sort === 'name') filtered.sort((a, b) => a.name.localeCompare(b.name));
+    else if (sort === 'newest') filtered.sort((a, b) => b.year - a.year);
+    else filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+
+    const grid = document.getElementById('project-grid');
+    if (filtered.length === 0) {
+        grid.innerHTML = '<div class="empty"><div class="empty-icon">🔍</div><div>No projects found matching your search.</div></div>';
+    } else {
+        grid.innerHTML = filtered.map(p => `
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-icon ${p.icon}">${CATEGORIES.find(c => c.id === p.cat)?.icon || '📦'}</div>
+                    <div class="card-info">
+                        <div class="card-name">${p.name}</div>
+                        <div class="card-author">@${p.author}</div>
+                    </div>
+                </div>
+                <div class="card-desc">${p.desc}</div>
+                <div class="card-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+                <div class="card-footer">
+                    <div class="card-meta">
+                        <span>💻 ${p.lang}</span>
+                        <span>📅 ${p.year}</span>
+                    </div>
+                    <a class="card-link" href="${p.url}" target="_blank">View →</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    renderPills();
+
+    // Populate category filter
+    const catFilter = document.getElementById('cat-filter');
+    if (catFilter.options.length <= 1) {
+        CATEGORIES.forEach(c => {
+            if (c.id === 'all') return;
+            const opt = document.createElement('option');
+            opt.value = c.id;
+            opt.textContent = `${c.icon} ${c.label}`;
+            catFilter.appendChild(opt);
+        });
+    }
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('kwos-dark') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.getElementById('dark-btn').textContent = '☀️ Light';
+    }
+
+    // Stats
+    const authors = new Set(PROJECTS.map(p => p.author));
+    document.getElementById('h-projects').textContent = PROJECTS.length;
+    document.getElementById('h-categories').textContent = CATEGORIES.length - 1;
+    document.getElementById('h-contributors').textContent = authors.size;
+
+    render();
+});
+</script>
+</body>
+</html>
