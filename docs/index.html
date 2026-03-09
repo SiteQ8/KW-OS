@@ -177,116 +177,19 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     </div>
 </div>
 
+<script src="projects.js"></script>
 <script>
-// ═══════════════════════════════════════════════════════════════
-// KW-OS PROJECT DATABASE
-// ═══════════════════════════════════════════════════════════════
-
-const CATEGORIES = [
-    {id:'all',label:'All',icon:'📦'},
-    {id:'cybersecurity',label:'Cybersecurity',icon:'🔐'},
-    {id:'compliance',label:'Compliance & GRC',icon:'📋'},
-    {id:'islamic',label:'Islamic Apps',icon:'🕌'},
-    {id:'security-ops',label:'Security Ops',icon:'🛡️'},
-    {id:'infrastructure',label:'Infrastructure',icon:'⚙️'},
-    {id:'community',label:'Community Tools',icon:'👥'},
-    {id:'data',label:'Data & Finance',icon:'📊'},
-    {id:'education',label:'Education',icon:'🎓'},
-];
-
-const PROJECTS = [
-    // ── @SiteQ8 — Ali AlEnezi ──────────────────────────────────
-    {name:'S7aba',desc:'Cloud Privilege Escalation & Post-Exploitation Framework. Pure Bash tool supporting AWS, Azure, GCP & Kubernetes with 14+ IAM escalation methods, lateral movement, persistence, and exfiltration modules.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/S7aba',cat:'cybersecurity',icon:'cyber',
-     tags:['bash','aws','azure','gcp','kubernetes','red-team','privesc'],lang:'Bash',stars:'★',featured:true,year:2026},
-
-    {name:'CORF Compliance Tool',desc:'Full-stack assessment tool for Kuwait Central Bank Cyber & Operational Resilience Framework (CORF) v1.0. 876 controls, 27 domains, PDF/Excel export, remediation tracker.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/corf-compliance-tool',cat:'compliance',icon:'compliance',
-     tags:['react','nodejs','sqlite','corf','cbk','kuwait','compliance'],lang:'JavaScript',stars:'★',featured:true,year:2026},
-
-    {name:'SAMA CSF Assessment',desc:'Bilingual (AR/EN) assessment tool for Saudi Central Bank Cybersecurity Framework. 4 domains, 114 sub-controls, 6 maturity levels, framework mappings to ISO/NIST/CIS/PCI/NCA.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/sama-csf-assessment',cat:'compliance',icon:'compliance',
-     tags:['sama','saudi','cybersecurity','bilingual','arabic','assessment'],lang:'HTML/JS',stars:'★',featured:true,year:2025},
-
-    {name:'Security Leadership Panel',desc:'CISO-grade cybersecurity governance dashboard aligned to NIST CSF 2.0 + CIS Controls v8. 6 modules: Dashboard, Frameworks, Metrics, Incidents, Vendor Risk, Planning.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/security-leadership-panel',cat:'security-ops',icon:'security',
-     tags:['nist-csf','cis-controls','ciso','dashboard','governance','chartjs'],lang:'HTML/JS',stars:'★',featured:true,year:2026},
-
-    {name:'TLS Cert Expiry Radar',desc:'Monitor SSL/TLS certificate expiry with interactive radar chart, doughnut chart, bar chart, global map, domain scanner, and dark mode. Zero-install browser app.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/tls-cert-expiry-radar',cat:'security-ops',icon:'security',
-     tags:['tls','ssl','certificates','monitoring','chartjs','leaflet','pwa'],lang:'HTML/JS',stars:'★',featured:true,year:2025},
-
-    {name:'Daily Ayah (آية اليوم)',desc:'Complete Holy Quran app — 114 surahs, 6,236 ayahs via AlQuran Cloud API. Uthmani script, Sahih International translation, surah browser, daily ayah rotation.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/daily-ayah',cat:'islamic',icon:'islamic',
-     tags:['quran','uthmani','arabic','bilingual','sahih-international','api'],lang:'HTML/JS',stars:'★',featured:true,year:2026},
-
-    {name:'Dua Collection (مجموعة الأدعية)',desc:'337+ authentic Islamic duas from Quran, Sunnah & Hisn al-Muslim. 20 categories, source citations, favorites, search, dark mode, mobile-first.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/duaarepo',cat:'islamic',icon:'islamic',
-     tags:['dua','islam','hadith','hisn-al-muslim','arabic','mobile-first'],lang:'HTML/JS',stars:'★',featured:true,year:2026},
-
-    {name:'CyberArsenal',desc:'Open-source cybersecurity tools platform cataloging 60+ tools across 12 categories. Searchable, filterable browser-based interface for security professionals.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/CyberArsenal',cat:'cybersecurity',icon:'cyber',
-     tags:['tools','catalog','offensive-security','defensive','osint','forensics'],lang:'HTML/JS',stars:'★',year:2026},
-
-    {name:'SecureArch',desc:'Browser-based security architecture design tool with drag-and-drop canvas, STRIDE threat modeling, and NIST/ISO/CIS compliance mapping.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/SecureArch',cat:'infrastructure',icon:'infra',
-     tags:['architecture','threat-modeling','stride','nist','iso27001','canvas'],lang:'HTML/JS',stars:'★',year:2026},
-
-    {name:'CyberStrategy Workbench',desc:'Strategic cybersecurity planning tool with 90-day roadmap planner, stakeholder matrix, policy builder, and executive brief generator.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/CyberStrategy-Workbench',cat:'security-ops',icon:'security',
-     tags:['strategy','planning','ciso','policy','executive','roadmap'],lang:'HTML/JS',stars:'★',year:2026},
-
-    {name:'OSINT Suite',desc:'Comprehensive OSINT framework (v2.0) with terminal-aesthetic React GUI. Multi-tool intelligence gathering for security researchers.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/osint-suite',cat:'cybersecurity',icon:'cyber',
-     tags:['osint','intelligence','reconnaissance','react','terminal-ui'],lang:'React',stars:'★',year:2026},
-
-    {name:'VulnScan Framework',desc:'Python ML-based vulnerability prediction framework covering 10 web attack categories. Machine learning models for vulnerability classification.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/VulnScan',cat:'cybersecurity',icon:'cyber',
-     tags:['python','machine-learning','vulnerability','scanner','ml','web-security'],lang:'Python',stars:'★',year:2026},
-
-    {name:'ICS/IoT/OT Security Framework',desc:'Industrial control systems security hardening framework aligned to IEC 62443, NIST SP 800-82, and NERC CIP standards.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/ics-iot-security',cat:'infrastructure',icon:'infra',
-     tags:['ics','iot','ot','scada','iec-62443','nist-800-82','nerc-cip'],lang:'Docs',stars:'★',year:2026},
-
-    {name:'SiteQ8 CyberToolkit',desc:'Modular bash cybersecurity toolkit for penetration testing, reconnaissance, and security assessments. Portable and dependency-light.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/CyberToolkit',cat:'cybersecurity',icon:'cyber',
-     tags:['bash','pentest','toolkit','recon','portable','modular'],lang:'Bash',stars:'★',year:2026},
-
-    {name:'AlEnezi CTF Tool',desc:'CTF toolkit (alenezi.sh) for Capture The Flag competitions. Mobile forensics, OSINT, web exploitation, and crypto challenges.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/alenezi-tool',cat:'cybersecurity',icon:'cyber',
-     tags:['ctf','forensics','osint','web-exploit','crypto','bash'],lang:'Bash',stars:'★',year:2026},
-
-    {name:'OpenShift Secure Architecture',desc:'Production-grade OpenShift security blueprint. PCI DSS v4.0, Zero Trust, CIS/NIST-aligned with interactive GUI for architecture design.',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/openshift-secure-arch',cat:'infrastructure',icon:'infra',
-     tags:['openshift','kubernetes','pci-dss','zero-trust','cis','nist'],lang:'HTML/JS',stars:'★',year:2026},
-
-    // ── Other Kuwaiti Developers & Projects ────────────────────
-    {name:'Amwal (Boursa Kuwait API)',desc:'Python library for getting information from the Kuwaiti stock market (Boursa Kuwait). Financial data scraping and analysis.',
-     author:'Community',url:'https://github.com/topics/kuwait',cat:'data',icon:'data',
-     tags:['python','finance','stock-market','boursa','kuwait','api'],lang:'Python',stars:'★',year:2024},
-
-    {name:'CIS Benchmark Checker (Kuwait Gov)',desc:'CIS Benchmark Compliance Checker designed for Kuwait Government Entities. Self-assessment tool for government cybersecurity standards.',
-     author:'Community',url:'https://github.com/topics/kuwait',cat:'compliance',icon:'compliance',
-     tags:['cis','government','kuwait','compliance','benchmark','security'],lang:'Various',stars:'★',year:2025},
-
-    {name:'Kuwait Prayer Times',desc:'Open-source prayer times calculation library with support for Kuwaiti calculation methods and timezone handling.',
-     author:'Community',url:'https://github.com/topics/kuwait',cat:'islamic',icon:'islamic',
-     tags:['prayer-times','islam','kuwait','calculation','mobile'],lang:'Various',stars:'★',year:2024},
-
-    {name:'Kuwait University Projects',desc:'Collection of open-source projects from Kuwait University students covering networking, ML, robotics, and computer science.',
-     author:'KU Students',url:'https://github.com/topics/kuwait-university',cat:'education',icon:'community',
-     tags:['university','students','networking','machine-learning','robotics'],lang:'Various',stars:'★',year:2025},
-
-    {name:'KW-OS Directory (This Project)',desc:'The Kuwait Open Source Directory itself — a curated catalog of open-source tools built by Kuwaiti developers. Submit your project!',
-     author:'SiteQ8',url:'https://github.com/SiteQ8/KW-OS',cat:'community',icon:'community',
-     tags:['directory','catalog','open-source','kuwait','community'],lang:'HTML/JS',stars:'★',featured:true,year:2026},
-];
-
-// ═══════════════════════════════════════════════════════════════
-// APP LOGIC
-// ═══════════════════════════════════════════════════════════════
+// Build CATEGORIES dynamically from CAT_LABELS
+const CATEGORIES = [{id:'all',label:'All',icon:'📿'}];
+if (typeof CAT_LABELS !== 'undefined') {
+    for (const [id, info] of Object.entries(CAT_LABELS)) {
+        CATEGORIES.push({id, label: info.label, icon: info.icon});
+    }
+}
 
 let activeCat = 'all';
+let currentPage = 1;
+const PAGE_SIZE = 30;
 
 function toggleDark() {
     const d = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -299,13 +202,13 @@ function renderPills() {
     const el = document.getElementById('pills');
     el.innerHTML = CATEGORIES.map(c => {
         const count = c.id === 'all' ? PROJECTS.length : PROJECTS.filter(p => p.cat === c.id).length;
-        return `<button class="pill ${c.id === activeCat ? 'active' : ''}" onclick="activeCat='${c.id}';document.getElementById('cat-filter').value='${c.id}';render()">
-            ${c.icon} ${c.label} <span class="pill-count">(${count})</span>
-        </button>`;
+        if (count === 0 && c.id !== 'all') return '';
+        return '<button class="pill ' + (c.id === activeCat ? 'active' : '') + '" onclick="activeCat=\'' + c.id + '\';document.getElementById(\'cat-filter\').value=\'' + c.id + '\';currentPage=1;render()">' +
+            c.icon + ' ' + c.label + ' <span class="pill-count">(' + count + ')</span></button>';
     }).join('');
 }
 
-function render() {
+function getFiltered() {
     const q = document.getElementById('search').value.toLowerCase();
     const cat = document.getElementById('cat-filter').value;
     const sort = document.getElementById('sort-select').value;
@@ -317,67 +220,86 @@ function render() {
         p.name.toLowerCase().includes(q) ||
         p.desc.toLowerCase().includes(q) ||
         p.author.toLowerCase().includes(q) ||
-        p.tags.some(t => t.includes(q))
+        (p.tags || []).some(t => t.includes(q)) ||
+        (p.lang || '').toLowerCase().includes(q)
     );
 
     if (sort === 'name') filtered.sort((a, b) => a.name.localeCompare(b.name));
-    else if (sort === 'newest') filtered.sort((a, b) => b.year - a.year);
-    else filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+    else if (sort === 'newest') filtered.sort((a, b) => (b.stars||0) - (a.stars||0));
+    else filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || (b.stars||0) - (a.stars||0));
+
+    return filtered;
+}
+
+function render() {
+    const filtered = getFiltered();
+    const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+    if (currentPage > totalPages) currentPage = 1;
+    const start = (currentPage - 1) * PAGE_SIZE;
+    const page = filtered.slice(start, start + PAGE_SIZE);
 
     const grid = document.getElementById('project-grid');
     if (filtered.length === 0) {
-        grid.innerHTML = '<div class="empty"><div class="empty-icon">🔍</div><div>No projects found matching your search.</div></div>';
+        grid.innerHTML = '<div class="empty"><div class="empty-icon">🔍</div><div>No projects found.</div></div>';
     } else {
-        grid.innerHTML = filtered.map(p => `
-            <div class="card">
-                <div class="card-top">
-                    <div class="card-icon ${p.icon}">${CATEGORIES.find(c => c.id === p.cat)?.icon || '📦'}</div>
-                    <div class="card-info">
-                        <div class="card-name">${p.name}</div>
-                        <div class="card-author">@${p.author}</div>
-                    </div>
-                </div>
-                <div class="card-desc">${p.desc}</div>
-                <div class="card-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-                <div class="card-footer">
-                    <div class="card-meta">
-                        <span>💻 ${p.lang}</span>
-                        <span>📅 ${p.year}</span>
-                    </div>
-                    <a class="card-link" href="${p.url}" target="_blank">View →</a>
-                </div>
-            </div>
-        `).join('');
+        grid.innerHTML = page.map(p => {
+            const catInfo = CAT_LABELS && CAT_LABELS[p.cat] ? CAT_LABELS[p.cat] : {icon:'📦'};
+            return '<div class="card">' +
+                '<div class="card-top">' +
+                    '<div class="card-icon" style="background:var(--green-dim);color:var(--green)">' + catInfo.icon + '</div>' +
+                    '<div class="card-info">' +
+                        '<div class="card-name">' + p.name + '</div>' +
+                        '<div class="card-author">@' + p.author + '</div>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="card-desc">' + p.desc + '</div>' +
+                '<div class="card-tags">' + (p.tags||[]).map(t => '<span class="tag">' + t + '</span>').join('') + '</div>' +
+                '<div class="card-footer">' +
+                    '<div class="card-meta">' +
+                        '<span>💻 ' + (p.lang || '?') + '</span>' +
+                        (p.stars > 0 ? '<span>⭐ ' + p.stars + '</span>' : '') +
+                    '</div>' +
+                    '<a class="card-link" href="' + p.url + '" target="_blank">View →</a>' +
+                '</div>' +
+            '</div>';
+        }).join('');
+
+        // Pagination
+        if (totalPages > 1) {
+            let pag = '<div style="grid-column:1/-1;display:flex;justify-content:center;gap:6px;padding:16px 0">';
+            pag += '<button class="pill" onclick="currentPage=Math.max(1,currentPage-1);render()" ' + (currentPage<=1?'disabled':'') + '>← Prev</button>';
+            pag += '<span style="padding:6px 12px;font-size:0.82rem;color:var(--text2)">Page ' + currentPage + ' of ' + totalPages + ' (' + filtered.length + ' projects)</span>';
+            pag += '<button class="pill" onclick="currentPage=Math.min('+totalPages+',currentPage+1);render()" ' + (currentPage>=totalPages?'disabled':'') + '>Next →</button>';
+            pag += '</div>';
+            grid.innerHTML += pag;
+        }
     }
 
     renderPills();
 
     // Populate category filter
     const catFilter = document.getElementById('cat-filter');
-    if (catFilter.options.length <= 1) {
-        CATEGORIES.forEach(c => {
-            if (c.id === 'all') return;
+    if (catFilter.options.length <= 1 && typeof CAT_LABELS !== 'undefined') {
+        for (const [id, info] of Object.entries(CAT_LABELS)) {
+            const count = PROJECTS.filter(p => p.cat === id).length;
+            if (count === 0) continue;
             const opt = document.createElement('option');
-            opt.value = c.id;
-            opt.textContent = `${c.icon} ${c.label}`;
+            opt.value = id;
+            opt.textContent = info.icon + ' ' + info.label + ' (' + count + ')';
             catFilter.appendChild(opt);
-        });
+        }
     }
 }
 
-// Init
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('kwos-dark') === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
         document.getElementById('dark-btn').textContent = '☀️ Light';
     }
-
-    // Stats
     const authors = new Set(PROJECTS.map(p => p.author));
     document.getElementById('h-projects').textContent = PROJECTS.length;
-    document.getElementById('h-categories').textContent = CATEGORIES.length - 1;
+    document.getElementById('h-categories').textContent = Object.keys(CAT_LABELS || {}).length;
     document.getElementById('h-contributors').textContent = authors.size;
-
     render();
 });
 </script>
