@@ -2,8 +2,8 @@
 
 <p align="center">
   <a href="https://siteq8.github.io/KW-OS"><img src="https://img.shields.io/badge/🚀-Live_Directory-007a3d?style=flat-square" alt="Live"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Projects-21+-007a3d?style=flat-square" alt="Projects"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Categories-8-0891b2?style=flat-square" alt="Categories"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Projects-266-007a3d?style=flat-square" alt="Projects"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Categories-12-0891b2?style=flat-square" alt="Categories"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Kuwait%20🇰🇼-Open_Source-c41a1a?style=flat-square" alt="Kuwait"/></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-gold?style=flat-square" alt="License"/></a>
 </p>
