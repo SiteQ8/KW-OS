@@ -2,14 +2,14 @@
 
 <p align="center">
   <a href="https://siteq8.github.io/KW-OS"><img src="https://img.shields.io/badge/🚀-Live_Directory-2563eb?style=flat-square" alt="Live"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Projects-266-2563eb?style=flat-square" alt="Projects"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Projects-269-2563eb?style=flat-square" alt="Projects"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Contributors-177-0891b2?style=flat-square" alt="Contributors"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Categories-12-7c3aed?style=flat-square" alt="Categories"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Kuwait%20🇰🇼-Open_Source-ce1126?style=flat-square" alt="Kuwait"/></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-gold?style=flat-square" alt="License"/></a>
 </p>
 
-A comprehensive directory of **266 open-source projects** by **177 developers** based in Kuwait. Scanned 507 GitHub users and 1,576 repositories via the GitHub API.
+A comprehensive directory of **269 open-source projects** by **177 developers** based in Kuwait. Scanned 507 GitHub users and 1,576 repositories via the GitHub API.
 
 🔗 **Browse:** [https://siteq8.github.io/KW-OS](https://siteq8.github.io/KW-OS)
 
