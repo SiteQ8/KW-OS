@@ -1,307 +1,565 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="KW-OS — Kuwait Open Source Directory. Discover open-source tools built by Kuwaiti developers 🇰🇼">
+<meta name="description" content="KW-OS — Kuwait Open Source Directory. Discover open-source projects built by Kuwaiti developers 🇰🇼">
+<meta name="theme-color" content="#0a0e1a">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🇰🇼</text></svg>">
 <title>KW-OS | Kuwait Open Source Directory</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
---bg:#f8faf9;--bg2:#edf2ef;--surface:#ffffff;--text:#0f2318;--text2:#4a6355;--text3:#8a9f92;
---green:#2563eb;--green2:#3b82f6;--green-dim:#2563eb10;--red:#c41a1a;--gold:#c49b1a;
---blue:#2563eb;--purple:#7c3aed;--cyan:#0891b2;--orange:#ea580c;
---border:#d4e0d8;--radius:12px;--shadow:0 2px 12px rgba(15,35,24,0.06);
---font:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+  --bg:#0a0e1a;--bg2:#0f1420;--surface:#141a2e;--surface2:#1a2138;
+  --text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;
+  --primary:#3b82f6;--primary2:#2563eb;--primary-dim:rgba(59,130,246,0.08);
+  --accent:#10b981;--accent-dim:rgba(16,185,129,0.08);
+  --border:rgba(148,163,184,0.08);--border2:rgba(148,163,184,0.12);
+  --radius:14px;--radius-sm:10px;
+  --shadow:0 4px 24px rgba(0,0,0,0.3);
+  --font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  --glass:rgba(20,26,46,0.7);--glass-border:rgba(148,163,184,0.06);
+  --glow:0 0 40px rgba(59,130,246,0.15);
 }
-html[data-theme="dark"]{
---bg:#0a1510;--bg2:#0f1f16;--surface:#142820;--text:#e0ece5;--text2:#8aab97;--text3:#5a7a66;
---border:#1e3a2c;--shadow:0 2px 12px rgba(0,0,0,0.2);--green-dim:#2563eb18;
+html[data-theme="light"]{
+  --bg:#f8fafc;--bg2:#f1f5f9;--surface:#ffffff;--surface2:#f8fafc;
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
+  --border:rgba(15,23,42,0.08);--border2:rgba(15,23,42,0.12);
+  --shadow:0 4px 24px rgba(0,0,0,0.06);
+  --glass:rgba(255,255,255,0.8);--glass-border:rgba(15,23,42,0.06);
+  --primary-dim:rgba(59,130,246,0.06);--accent-dim:rgba(16,185,129,0.06);
+  --glow:none;
 }
-body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;transition:all .3s}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--primary);color:#fff}
 
-/* Header */
-.header{background:linear-gradient(135deg,#0f1d4d 0%,#2563eb 50%,#1e40af 100%);color:#fff;padding:48px 24px 36px;text-align:center;position:relative;overflow:hidden}
-.header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.3' opacity='0.07'%3E%3Crect x='5' y='5' width='30' height='30' rx='4'/%3E%3Ccircle cx='20' cy='20' r='8'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
-.header h1{font-size:2.2rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:4px;position:relative}
-.header h1 .flag{font-size:1.6rem}
-.header-sub{font-size:0.95rem;opacity:0.8;margin-bottom:16px;position:relative}
-.header-stats{display:flex;justify-content:center;gap:24px;margin-top:12px;position:relative}
+/* Animated Hero */
+.hero{position:relative;padding:80px 24px 60px;text-align:center;overflow:hidden;background:linear-gradient(180deg,var(--bg) 0%,var(--surface) 100%)}
+.hero::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(ellipse 600px 400px at 30% 20%,rgba(59,130,246,0.08) 0%,transparent 70%),
+  radial-gradient(ellipse 500px 300px at 70% 60%,rgba(16,185,129,0.06) 0%,transparent 70%);
+  pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:
+  linear-gradient(rgba(148,163,184,0.03) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(148,163,184,0.03) 1px,transparent 1px);
+  background-size:48px 48px;mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,black 20%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,black 20%,transparent 80%)}
+
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:100px;background:var(--primary-dim);border:1px solid rgba(59,130,246,0.15);font-size:0.75rem;font-weight:600;color:var(--primary);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:20px;position:relative}
+.hero-badge .pulse{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.5)}}
+
+.hero h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px;position:relative}
+.hero h1 .gradient{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.05rem;color:var(--text2);max-width:500px;margin:0 auto 32px;line-height:1.6;position:relative}
+
+.hero-stats{display:flex;justify-content:center;gap:40px;margin-bottom:36px;position:relative}
 .hstat{text-align:center}
-.hstat-num{font-size:1.8rem;font-weight:700}
-.hstat-label{font-size:0.7rem;opacity:0.7;text-transform:uppercase;letter-spacing:0.5px}
-.header-actions{display:flex;justify-content:center;gap:8px;margin-top:16px;position:relative}
-.hbtn{background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:7px 16px;border-radius:8px;cursor:pointer;font-family:var(--font);font-size:0.78rem;font-weight:500;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
-.hbtn:hover{background:rgba(255,255,255,0.24)}
-.hbtn svg{width:14px;height:14px;fill:currentColor}
+.hstat-num{font-size:clamp(2rem,4vw,2.8rem);font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,var(--text),var(--text2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hstat-label{font-size:0.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-top:2px}
 
-.container{max-width:1200px;margin:0 auto;padding:0 16px}
+.hero-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;position:relative}
+.btn{padding:10px 22px;border-radius:var(--radius-sm);font-family:var(--font);font-size:0.82rem;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px;border:none}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 2px 12px rgba(59,130,246,0.25)}
+.btn-primary:hover{background:var(--primary2);transform:translateY(-1px);box-shadow:0 4px 20px rgba(59,130,246,0.35)}
+.btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--border2)}
+.btn-ghost:hover{border-color:var(--primary);color:var(--primary)}
+.btn svg{width:15px;height:15px;fill:currentColor}
 
-/* Search + Filter Bar */
-.toolbar{position:sticky;top:0;z-index:100;background:var(--bg);padding:12px 0;transition:background .3s}
-.toolbar-inner{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.search-box{flex:1;min-width:200px;padding:10px 16px 10px 40px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font);font-size:0.9rem;background:var(--surface);color:var(--text);outline:none;transition:border-color .2s}
-.search-box:focus{border-color:var(--green)}
-.search-wrap{position:relative;flex:1;min-width:200px}
-.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none}
-.filter-select{padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font);font-size:0.85rem;background:var(--surface);color:var(--text);cursor:pointer}
-.sort-select{padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font);font-size:0.85rem;background:var(--surface);color:var(--text);cursor:pointer}
+/* Container */
+.container{max-width:1280px;margin:0 auto;padding:0 20px}
 
-/* Category pills */
-.pills{display:flex;gap:6px;overflow-x:auto;padding:8px 0 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+/* Toolbar */
+.toolbar{position:sticky;top:0;z-index:100;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-border);padding:12px 0;transition:background .3s}
+.toolbar-inner{display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:1280px;margin:0 auto;padding:0 20px}
+.search-wrap{position:relative;flex:1;min-width:220px}
+.search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--text3);pointer-events:none}
+.search-box{width:100%;padding:10px 16px 10px 42px;border:1.5px solid var(--border2);border-radius:var(--radius-sm);font-family:var(--font);font-size:0.88rem;background:var(--surface);color:var(--text);outline:none;transition:all .2s}
+.search-box:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-dim)}
+.search-box::placeholder{color:var(--text3)}
+.search-kbd{position:absolute;right:12px;top:50%;transform:translateY(-50%);padding:2px 7px;border-radius:5px;font-size:0.65rem;font-family:var(--mono);color:var(--text3);background:var(--bg2);border:1px solid var(--border2)}
+select.ctrl{padding:10px 14px;border:1.5px solid var(--border2);border-radius:var(--radius-sm);font-family:var(--font);font-size:0.82rem;background:var(--surface);color:var(--text);cursor:pointer;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
+select.ctrl:focus{border-color:var(--primary)}
+.result-count{font-size:0.75rem;color:var(--text3);font-weight:500;white-space:nowrap}
+
+/* Category Pills */
+.pills-wrap{padding:12px 0 8px}
+.pills{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .pills::-webkit-scrollbar{display:none}
-.pill{white-space:nowrap;padding:6px 14px;border-radius:100px;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);font-size:0.75rem;font-weight:600;cursor:pointer;transition:all .2s;flex-shrink:0;font-family:var(--font)}
-.pill.active{background:var(--green);color:#fff;border-color:var(--green)}
-.pill:hover:not(.active){border-color:var(--green2);color:var(--green)}
-.pill-count{font-weight:400;opacity:0.7;margin-left:3px}
+.pill{white-space:nowrap;padding:7px 16px;border-radius:100px;border:1.5px solid var(--border2);background:var(--surface);color:var(--text2);font-size:0.75rem;font-weight:600;cursor:pointer;transition:all .25s;flex-shrink:0;font-family:var(--font);display:inline-flex;align-items:center;gap:5px}
+.pill:hover:not(.active){border-color:rgba(59,130,246,0.3);color:var(--primary);background:var(--primary-dim)}
+.pill.active{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 2px 12px rgba(59,130,246,0.25)}
+.pill-count{opacity:0.7;font-weight:400}
 
 /* Project Grid */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;padding-bottom:40px}
-@media(max-width:720px){.grid{grid-template-columns:1fr}}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px;padding-bottom:32px}
+@media(max-width:768px){.grid{grid-template-columns:1fr}}
 
 /* Project Card */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all .2s;position:relative;overflow:hidden;display:flex;flex-direction:column}
-.card:hover{box-shadow:var(--shadow);border-color:var(--green);transform:translateY(-2px)}
-.card-top{display:flex;align-items:start;gap:12px;margin-bottom:12px}
-.card-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
-.card-icon.cyber{background:#ef444415;color:#ef4444}
-.card-icon.compliance{background:#3b82f615;color:#3b82f6}
-.card-icon.islamic{background:#007a3d15;color:#007a3d}
-.card-icon.security{background:#7c3aed15;color:#7c3aed}
-.card-icon.infra{background:#0891b215;color:#0891b2}
-.card-icon.community{background:#ea580c15;color:#ea580c}
-.card-icon.data{background:#c49b1a15;color:#c49b1a}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:all .3s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--primary),transparent);opacity:0;transition:opacity .3s}
+.card:hover{border-color:rgba(59,130,246,0.2);box-shadow:var(--glow);transform:translateY(-3px)}
+.card:hover::before{opacity:1}
+.card.featured{border-color:rgba(59,130,246,0.15)}
+.card.featured .card-name::after{content:'★';margin-left:6px;color:var(--accent);font-size:0.7rem}
+
+.card-top{display:flex;align-items:start;gap:14px;margin-bottom:14px}
+.card-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;background:var(--primary-dim);position:relative}
 .card-info{flex:1;min-width:0}
-.card-name{font-size:1rem;font-weight:700;margin-bottom:2px;color:var(--text)}
-.card-author{font-size:0.72rem;color:var(--text3);font-family:var(--mono)}
-.card-desc{font-size:0.84rem;color:var(--text2);line-height:1.6;margin-bottom:12px;flex:1}
-.card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
-.tag{padding:2px 8px;border-radius:100px;font-size:0.65rem;font-weight:600;background:var(--green-dim);color:var(--green);font-family:var(--mono)}
-.card-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:10px;margin-top:auto}
-.card-meta{display:flex;gap:12px;font-size:0.72rem;color:var(--text3)}
+.card-name{font-size:0.95rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-author{font-size:0.72rem;color:var(--text3);font-family:var(--mono);margin-top:1px}
+.card-desc{font-size:0.82rem;color:var(--text2);line-height:1.65;margin-bottom:14px;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px}
+.tag{padding:3px 9px;border-radius:6px;font-size:0.62rem;font-weight:600;color:var(--primary);background:var(--primary-dim);font-family:var(--mono);letter-spacing:0.2px}
+.card-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:12px;margin-top:auto}
+.card-meta{display:flex;gap:14px;font-size:0.72rem;color:var(--text3);align-items:center}
+.lang-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:4px;flex-shrink:0}
 .card-meta span{display:flex;align-items:center;gap:3px}
-.card-link{padding:5px 14px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-family:var(--font);font-size:0.75rem;font-weight:600;text-decoration:none;transition:all .15s}
-.card-link:hover{border-color:var(--green);color:var(--green)}
+.card-link{padding:6px 16px;border-radius:8px;background:var(--primary-dim);color:var(--primary);font-family:var(--font);font-size:0.72rem;font-weight:600;text-decoration:none;transition:all .2s;border:none;cursor:pointer}
+.card-link:hover{background:var(--primary);color:#fff}
 
-/* Stats section */
-.stats-section{padding:32px 0}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center}
-.stat-card-num{font-size:2rem;font-weight:700;color:var(--green)}
-.stat-card-label{font-size:0.75rem;color:var(--text3);margin-top:4px}
+/* Stats Section */
+.stats-section{padding:40px 0;border-top:1px solid var(--border)}
+.stats-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.section-title{font-size:0.72rem;font-weight:700;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:relative;overflow:hidden}
+.stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
+.stat-card:nth-child(1)::after{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
+.stat-card:nth-child(2)::after{background:linear-gradient(90deg,#10b981,#34d399)}
+.stat-card:nth-child(3)::after{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.stat-card:nth-child(4)::after{background:linear-gradient(90deg,#8b5cf6,#a78bfa)}
+.stat-num{font-size:1.8rem;font-weight:800;letter-spacing:-0.5px;color:var(--text)}
+.stat-label{font-size:0.72rem;color:var(--text3);margin-top:2px;font-weight:500}
 
-/* Section title */
-.section-title{font-size:0.78rem;font-weight:700;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin:24px 0 12px;display:flex;align-items:center;gap:8px}
-.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+/* Language Distribution */
+.lang-bars{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.lang-bar{display:flex;align-items:center;gap:6px;font-size:0.72rem;color:var(--text2);font-weight:500}
+.lang-bar-dot{width:8px;height:8px;border-radius:50%}
+.lang-bar-fill{height:4px;border-radius:2px;min-width:8px;transition:width .5s}
+
+/* Top Contributors */
+.contrib-section{padding:32px 0}
+.contrib-grid{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+.contrib-grid::-webkit-scrollbar{display:none}
+.contrib-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;flex-shrink:0;min-width:180px;text-align:center;transition:all .2s}
+.contrib-card:hover{border-color:var(--primary);transform:translateY(-2px)}
+.contrib-avatar{width:40px;height:40px;border-radius:50%;background:var(--primary-dim);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1rem;font-weight:700;color:var(--primary)}
+.contrib-name{font-size:0.82rem;font-weight:600;color:var(--text)}
+.contrib-count{font-size:0.68rem;color:var(--text3);font-family:var(--mono)}
+.contrib-link{font-size:0.68rem;color:var(--primary);text-decoration:none;font-weight:500}
 
 /* CTA */
-.cta{background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;border-radius:var(--radius);padding:32px;text-align:center;margin:32px 0}
-.cta h3{font-size:1.3rem;margin-bottom:8px}
-.cta p{font-size:0.9rem;opacity:0.85;margin-bottom:16px}
-.cta-btn{display:inline-block;padding:10px 24px;border-radius:10px;background:#fff;color:var(--green);font-weight:700;font-size:0.9rem;text-decoration:none;transition:all .2s}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.15)}
+.cta{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:40px;text-align:center;margin:32px 0;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,0.04),rgba(16,185,129,0.04));pointer-events:none}
+.cta h3{font-size:1.4rem;font-weight:800;margin-bottom:8px;position:relative}
+.cta p{font-size:0.9rem;color:var(--text2);margin-bottom:20px;position:relative}
+
+/* Pagination */
+.pagination{display:flex;justify-content:center;align-items:center;gap:4px;padding:24px 0;grid-column:1/-1}
+.page-btn{padding:8px 14px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);font-family:var(--font);font-size:0.78rem;font-weight:600;cursor:pointer;transition:all .2s}
+.page-btn:hover:not(:disabled){border-color:var(--primary);color:var(--primary)}
+.page-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.page-btn:disabled{opacity:0.3;cursor:not-allowed}
+.page-info{font-size:0.75rem;color:var(--text3);padding:0 8px}
 
 /* Footer */
-.footer{text-align:center;padding:32px 16px;font-size:0.78rem;color:var(--text3);border-top:1px solid var(--border)}
-.footer a{color:var(--green);text-decoration:none}
+.footer{text-align:center;padding:40px 20px;border-top:1px solid var(--border);font-size:0.75rem;color:var(--text3)}
+.footer a{color:var(--primary);text-decoration:none;font-weight:500}
+.footer a:hover{text-decoration:underline}
+.footer-links{display:flex;justify-content:center;gap:16px;margin-top:12px}
+.footer-dot{opacity:0.3}
+.last-updated{font-size:0.68rem;color:var(--text3);opacity:0.6;margin-top:8px}
 
 /* Empty */
-.empty{text-align:center;padding:60px 20px;color:var(--text3)}
-.empty-icon{font-size:3rem;opacity:0.3;margin-bottom:12px}
+.empty{text-align:center;padding:80px 20px;color:var(--text3);grid-column:1/-1}
+.empty-icon{font-size:3rem;opacity:0.2;margin-bottom:16px}
+.empty-text{font-size:0.9rem;margin-bottom:4px}
+.empty-sub{font-size:0.78rem;opacity:0.6}
 
 /* Toast */
-.toast{position:fixed;bottom:1.5rem;right:1.5rem;padding:10px 18px;border-radius:10px;font-size:0.82rem;font-weight:500;color:#fff;background:var(--green);z-index:10000;box-shadow:0 8px 24px rgba(0,0,0,0.2);animation:toastIn .3s ease-out,toastOut .3s ease-in 2s forwards}
-@keyframes toastIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.toast{position:fixed;bottom:20px;right:20px;padding:12px 20px;border-radius:var(--radius-sm);font-size:0.82rem;font-weight:500;color:#fff;background:var(--primary);z-index:10000;box-shadow:0 8px 32px rgba(0,0,0,0.3);animation:toastIn .3s ease-out,toastOut .3s ease-in 2s forwards}
+@keyframes toastIn{from{opacity:0;transform:translateY(20px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes toastOut{from{opacity:1}to{opacity:0;transform:translateY(20px)}}
 
-@media(max-width:600px){.header h1{font-size:1.6rem}.header-stats{gap:16px}.hstat-num{font-size:1.4rem}}
+/* Back to top */
+.back-top{position:fixed;bottom:20px;left:20px;width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--border2);color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(20px);transition:all .3s;z-index:100;font-size:1.1rem}
+.back-top.show{opacity:1;transform:translateY(0)}
+.back-top:hover{border-color:var(--primary);color:var(--primary)}
+
+/* Scroll Reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:all .5s cubic-bezier(0.4,0,0.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Responsive */
+@media(max-width:640px){
+  .hero{padding:60px 16px 40px}
+  .hero h1{font-size:2rem}
+  .hero-stats{gap:20px}
+  .hstat-num{font-size:1.8rem}
+  .toolbar-inner{gap:6px}
+  .grid{gap:10px}
+  .card{padding:16px}
+  .cta{padding:24px 16px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:400px){
+  .grid{grid-template-columns:1fr}
+  .hero-actions{flex-direction:column;align-items:center}
+}
 </style>
 </head>
 <body>
-<div class="header">
-    <h1><span class="flag">🇰🇼</span> KW-OS</h1>
-    <div class="header-sub">Kuwait Open Source Directory — 269 projects from 180+ developers 🇰🇼</div>
-    <div class="header-stats">
-        <div class="hstat"><div class="hstat-num" id="h-projects">0</div><div class="hstat-label">Projects</div></div>
-        <div class="hstat"><div class="hstat-num" id="h-categories">0</div><div class="hstat-label">Categories</div></div>
-        <div class="hstat"><div class="hstat-num" id="h-contributors">0</div><div class="hstat-label">Contributors</div></div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-badge"><span class="pulse"></span> Open Source Kuwait</div>
+  <h1>🇰🇼 <span class="gradient">KW-OS</span></h1>
+  <p class="hero-sub">Discover open-source projects built by Kuwaiti developers. Curated directory of tools, libraries, and apps from Kuwait's tech community.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-num" id="h-projects">0</div><div class="hstat-label">Projects</div></div>
+    <div class="hstat"><div class="hstat-num" id="h-categories">0</div><div class="hstat-label">Categories</div></div>
+    <div class="hstat"><div class="hstat-num" id="h-contributors">0</div><div class="hstat-label">Contributors</div></div>
+    <div class="hstat"><div class="hstat-num" id="h-stars">0</div><div class="hstat-label">Total Stars</div></div>
+  </div>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="https://github.com/SiteQ8/KW-OS/issues/new?title=[NEW+PROJECT]&body=Project+Name:%0AGitHub+URL:%0ADescription:%0ACategory:" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm1 12H7V7h2v5zm0-6H7V4h2v2z"/></svg>
+      Submit Project
+    </a>
+    <a class="btn btn-ghost" href="https://github.com/SiteQ8/KW-OS" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      Star on GitHub
+    </a>
+    <button class="btn btn-ghost" id="theme-btn" onclick="toggleTheme()">☀️ Light</button>
+  </div>
+</section>
+
+<!-- Toolbar -->
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="search-wrap">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6.5" cy="6.5" r="5"/><path d="M10 10l4 4"/></svg>
+      <input type="text" class="search-box" id="search" placeholder="Search projects, authors, tags..." oninput="render()">
+      <span class="search-kbd">/</span>
     </div>
-    <div class="header-actions">
-        <button class="hbtn" id="dark-btn" onclick="toggleDark()">🌙 Dark</button>
-        <a class="hbtn" href="https://github.com/SiteQ8/KW-OS" target="_blank">
-            <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-            Star on GitHub
-        </a>
-        <a class="hbtn" href="https://github.com/SiteQ8/KW-OS/issues/new" target="_blank">➕ Submit Project</a>
-    </div>
+    <select class="ctrl" id="cat-filter" onchange="render()">
+      <option value="all">All Categories</option>
+    </select>
+    <select class="ctrl" id="lang-filter" onchange="render()">
+      <option value="all">All Languages</option>
+    </select>
+    <select class="ctrl" id="sort-select" onchange="render()">
+      <option value="stars">⭐ Most Stars</option>
+      <option value="featured">🏆 Featured</option>
+      <option value="name">🔤 Name A-Z</option>
+      <option value="author">👤 Author</option>
+    </select>
+    <span class="result-count" id="result-count"></span>
+  </div>
 </div>
 
 <div class="container">
-    <!-- Toolbar -->
-    <div class="toolbar">
-        <div class="toolbar-inner">
-            <div class="search-wrap">
-                <span class="search-icon">🔍</span>
-                <input type="text" class="search-box" id="search" placeholder="Search projects, tools, authors..." oninput="render()">
-            </div>
-            <select class="filter-select" id="cat-filter" onchange="render()">
-                <option value="all">All Categories</option>
-            </select>
-            <select class="sort-select" id="sort-select" onchange="render()">
-                <option value="featured">Featured</option>
-                <option value="name">Name A-Z</option>
-                <option value="newest">Newest First</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- Pills -->
+  <!-- Pills -->
+  <div class="pills-wrap">
     <div class="pills" id="pills"></div>
+  </div>
 
-    <!-- Grid -->
-    <div class="grid" id="project-grid"></div>
+  <!-- Grid -->
+  <div class="grid" id="project-grid"></div>
 
-    <!-- CTA -->
-    <div class="cta">
-        <h3>🇰🇼 Built something open source in Kuwait?</h3>
-        <p>Submit your project to be featured in the KW-OS directory. Help grow the Kuwaiti open-source community.</p>
-        <a class="cta-btn" href="https://github.com/SiteQ8/KW-OS/issues/new?title=[NEW+PROJECT]&body=Project+Name:%0AGitHub+URL:%0ADescription:%0ACategory:" target="_blank">Submit Your Project →</a>
+  <!-- Stats -->
+  <section class="stats-section reveal" id="stats-section">
+    <div class="stats-header">
+      <span class="section-title">📊 Directory Stats</span>
     </div>
+    <div class="stats-grid" id="stats-grid"></div>
+    <div class="lang-bars" id="lang-bars"></div>
+  </section>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p>🇰🇼 KW-OS — Kuwait Open Source Directory</p>
-        <p>Curated by <a href="https://github.com/SiteQ8" target="_blank">@SiteQ8</a> — Ali AlEnezi</p>
-        <p style="margin-top:6px;opacity:0.6">Open source. Open community. Open Kuwait.</p>
+  <!-- Top Contributors -->
+  <section class="contrib-section reveal">
+    <div class="stats-header">
+      <span class="section-title">🏆 Top Contributors</span>
     </div>
+    <div class="contrib-grid" id="contrib-grid"></div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta reveal">
+    <h3>🇰🇼 Built something open source?</h3>
+    <p>Submit your project to be featured in the KW-OS directory and help grow Kuwait's open-source community.</p>
+    <a class="btn btn-primary" href="https://github.com/SiteQ8/KW-OS/issues/new?title=[NEW+PROJECT]&body=Project+Name:%0AGitHub+URL:%0ADescription:%0ACategory:" target="_blank">Submit Your Project →</a>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p><strong>KW-OS</strong> — Kuwait Open Source Directory</p>
+    <div class="footer-links">
+      <a href="https://github.com/SiteQ8" target="_blank">@SiteQ8</a>
+      <span class="footer-dot">·</span>
+      <a href="https://github.com/SiteQ8/KW-OS" target="_blank">GitHub</a>
+      <span class="footer-dot">·</span>
+      <a href="https://github.com/SiteQ8/KW-OS/issues" target="_blank">Submit</a>
+    </div>
+    <p class="last-updated">Curated by Ali AlEnezi · Data auto-synced via GitHub Actions</p>
+  </div>
 </div>
+
+<!-- Back to top -->
+<button class="back-top" id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script src="projects.js"></script>
 <script>
-// Build CATEGORIES dynamically from CAT_LABELS
-const CATEGORIES = [{id:'all',label:'All',icon:'📿'}];
-if (typeof CAT_LABELS !== 'undefined') {
-    for (const [id, info] of Object.entries(CAT_LABELS)) {
-        CATEGORIES.push({id, label: info.label, icon: info.icon});
-    }
+/* Language Colors (GitHub) */
+const LANG_COLORS={
+  'JavaScript':'#f1e05a','TypeScript':'#3178c6','Python':'#3572A5','Go':'#00ADD8',
+  'Rust':'#dea584','C#':'#178600','Java':'#b07219','PHP':'#4F5D95','Swift':'#F05138',
+  'Kotlin':'#A97BFF','C++':'#f34b7d','C':'#555555','Dart':'#00B4AB','Ruby':'#701516',
+  'HTML':'#e34c26','CSS':'#563d7c','Shell':'#89e051','Lua':'#000080','R':'#198CE7',
+  'Assembly':'#6E4C13','Batchfile':'#C1F12E','Elixir':'#6e4a7e','Vue':'#41b883',
+  'Svelte':'#ff3e00','GDScript':'#355570','Blade':'#f7523f','HCL':'#844FBA',
+  'Jupyter Notebook':'#DA5B0B','Objective-C':'#438eff','Dockerfile':'#384d54',
+  'Markdown':'#083fa1','SVG':'#ff9900','Various':'#64748b'
+};
+
+const CATEGORIES=[{id:'all',label:'All',icon:'📂'}];
+if(typeof CAT_LABELS!=='undefined'){
+  for(const[id,info]of Object.entries(CAT_LABELS))CATEGORIES.push({id,label:info.label,icon:info.icon});
 }
 
-let activeCat = 'all';
-let currentPage = 1;
-const PAGE_SIZE = 30;
+let activeCat='all',currentPage=1;
+const PAGE_SIZE=30;
 
-function toggleDark() {
-    const d = document.documentElement.getAttribute('data-theme') === 'dark';
-    document.documentElement.setAttribute('data-theme', d ? '' : 'dark');
-    document.getElementById('dark-btn').textContent = d ? '🌙 Dark' : '☀️ Light';
-    try { localStorage.setItem('kwos-dark', d ? '' : 'dark'); } catch(e) {}
+/* Theme Toggle */
+function toggleTheme(){
+  const html=document.documentElement;
+  const isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  document.getElementById('theme-btn').textContent=isDark?'🌙 Dark':'☀️ Light';
+  try{localStorage.setItem('kwos-theme',isDark?'light':'dark')}catch(e){}
 }
 
-function renderPills() {
-    const el = document.getElementById('pills');
-    el.innerHTML = CATEGORIES.map(c => {
-        const count = c.id === 'all' ? PROJECTS.length : PROJECTS.filter(p => p.cat === c.id).length;
-        if (count === 0 && c.id !== 'all') return '';
-        return '<button class="pill ' + (c.id === activeCat ? 'active' : '') + '" onclick="activeCat=\'' + c.id + '\';document.getElementById(\'cat-filter\').value=\'' + c.id + '\';currentPage=1;render()">' +
-            c.icon + ' ' + c.label + ' <span class="pill-count">(' + count + ')</span></button>';
+/* Animated Counter */
+function animateCount(el,target){
+  const duration=800;
+  const start=performance.now();
+  const from=0;
+  function tick(now){
+    const p=Math.min((now-start)/duration,1);
+    const ease=1-Math.pow(1-p,3);
+    el.textContent=Math.round(from+ease*(target-from)).toLocaleString();
+    if(p<1)requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* Render Pills */
+function renderPills(){
+  const el=document.getElementById('pills');
+  el.innerHTML=CATEGORIES.map(c=>{
+    const count=c.id==='all'?PROJECTS.length:PROJECTS.filter(p=>p.cat===c.id).length;
+    if(count===0&&c.id!=='all')return'';
+    return`<button class="pill ${c.id===activeCat?'active':''}" onclick="activeCat='${c.id}';document.getElementById('cat-filter').value='${c.id}';currentPage=1;render()">${c.icon} ${c.label} <span class="pill-count">${count}</span></button>`;
+  }).join('');
+}
+
+/* Filter + Sort */
+function getFiltered(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const cat=document.getElementById('cat-filter').value;
+  const lang=document.getElementById('lang-filter').value;
+  const sort=document.getElementById('sort-select').value;
+  activeCat=cat;
+  let f=[...PROJECTS];
+  if(cat!=='all')f=f.filter(p=>p.cat===cat);
+  if(lang!=='all')f=f.filter(p=>(p.lang||'').toLowerCase()===lang.toLowerCase());
+  if(q)f=f.filter(p=>
+    p.name.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q)||
+    p.author.toLowerCase().includes(q)||(p.tags||[]).some(t=>t.includes(q))||
+    (p.lang||'').toLowerCase().includes(q)
+  );
+  if(sort==='name')f.sort((a,b)=>a.name.localeCompare(b.name));
+  else if(sort==='author')f.sort((a,b)=>a.author.localeCompare(b.author));
+  else if(sort==='featured')f.sort((a,b)=>(b.featured?1:0)-(a.featured?1:0)||(b.stars||0)-(a.stars||0));
+  else f.sort((a,b)=>(b.stars||0)-(a.stars||0));
+  return f;
+}
+
+/* Render Grid */
+function render(){
+  const filtered=getFiltered();
+  const totalPages=Math.ceil(filtered.length/PAGE_SIZE);
+  if(currentPage>totalPages)currentPage=1;
+  const start=(currentPage-1)*PAGE_SIZE;
+  const page=filtered.slice(start,start+PAGE_SIZE);
+
+  document.getElementById('result-count').textContent=`${filtered.length} project${filtered.length!==1?'s':''}`;
+
+  const grid=document.getElementById('project-grid');
+  if(filtered.length===0){
+    grid.innerHTML='<div class="empty"><div class="empty-icon">🔍</div><div class="empty-text">No projects found</div><div class="empty-sub">Try a different search or category</div></div>';
+  }else{
+    grid.innerHTML=page.map(p=>{
+      const catInfo=CAT_LABELS&&CAT_LABELS[p.cat]?CAT_LABELS[p.cat]:{icon:'📦'};
+      const langColor=LANG_COLORS[p.lang]||'#64748b';
+      const tags=(p.tags||[]).slice(0,4).map(t=>`<span class="tag">${t}</span>`).join('');
+      return`<div class="card ${p.featured?'featured':''}">
+        <div class="card-top">
+          <div class="card-icon">${catInfo.icon}</div>
+          <div class="card-info">
+            <div class="card-name" title="${p.name}">${p.name}</div>
+            <div class="card-author">@${p.author}</div>
+          </div>
+        </div>
+        <div class="card-desc">${p.desc}</div>
+        ${tags?`<div class="card-tags">${tags}</div>`:''}
+        <div class="card-footer">
+          <div class="card-meta">
+            <span><span class="lang-dot" style="background:${langColor}"></span>${p.lang||'—'}</span>
+            ${p.stars>0?`<span>⭐ ${p.stars}</span>`:''}
+          </div>
+          <a class="card-link" href="${p.url}" target="_blank" rel="noopener">View →</a>
+        </div>
+      </div>`;
     }).join('');
+
+    /* Pagination */
+    if(totalPages>1){
+      let pag='<div class="pagination">';
+      pag+=`<button class="page-btn" onclick="currentPage=Math.max(1,currentPage-1);render();window.scrollTo({top:300,behavior:'smooth'})" ${currentPage<=1?'disabled':''}>← Prev</button>`;
+      const maxBtns=5;
+      let startP=Math.max(1,currentPage-Math.floor(maxBtns/2));
+      let endP=Math.min(totalPages,startP+maxBtns-1);
+      if(endP-startP<maxBtns-1)startP=Math.max(1,endP-maxBtns+1);
+      if(startP>1){pag+=`<button class="page-btn" onclick="currentPage=1;render();window.scrollTo({top:300,behavior:'smooth'})">1</button>`;if(startP>2)pag+='<span class="page-info">…</span>';}
+      for(let i=startP;i<=endP;i++)pag+=`<button class="page-btn ${i===currentPage?'active':''}" onclick="currentPage=${i};render();window.scrollTo({top:300,behavior:'smooth'})">${i}</button>`;
+      if(endP<totalPages){if(endP<totalPages-1)pag+='<span class="page-info">…</span>';pag+=`<button class="page-btn" onclick="currentPage=${totalPages};render();window.scrollTo({top:300,behavior:'smooth'})">${totalPages}</button>`;}
+      pag+=`<button class="page-btn" onclick="currentPage=Math.min(${totalPages},currentPage+1);render();window.scrollTo({top:300,behavior:'smooth'})" ${currentPage>=totalPages?'disabled':''}>Next →</button>`;
+      pag+='</div>';
+      grid.innerHTML+=pag;
+    }
+  }
+  renderPills();
 }
 
-function getFiltered() {
-    const q = document.getElementById('search').value.toLowerCase();
-    const cat = document.getElementById('cat-filter').value;
-    const sort = document.getElementById('sort-select').value;
-    activeCat = cat;
+/* Build Stats */
+function buildStats(){
+  const langMap={};
+  let totalStars=0;
+  PROJECTS.forEach(p=>{
+    totalStars+=(p.stars||0);
+    const l=p.lang||'Various';
+    langMap[l]=(langMap[l]||0)+1;
+  });
+  const authors=new Set(PROJECTS.map(p=>p.author));
+  const catCount=Object.keys(CAT_LABELS||{}).length;
+  const featuredCount=PROJECTS.filter(p=>p.featured).length;
 
-    let filtered = [...PROJECTS];
-    if (cat !== 'all') filtered = filtered.filter(p => p.cat === cat);
-    if (q) filtered = filtered.filter(p =>
-        p.name.toLowerCase().includes(q) ||
-        p.desc.toLowerCase().includes(q) ||
-        p.author.toLowerCase().includes(q) ||
-        (p.tags || []).some(t => t.includes(q)) ||
-        (p.lang || '').toLowerCase().includes(q)
-    );
+  /* Stat Cards */
+  document.getElementById('stats-grid').innerHTML=`
+    <div class="stat-card"><div class="stat-num">${PROJECTS.length}</div><div class="stat-label">Total Projects</div></div>
+    <div class="stat-card"><div class="stat-num">${authors.size}</div><div class="stat-label">Contributors</div></div>
+    <div class="stat-card"><div class="stat-num">${totalStars.toLocaleString()}</div><div class="stat-label">Total Stars</div></div>
+    <div class="stat-card"><div class="stat-num">${featuredCount}</div><div class="stat-label">Featured Projects</div></div>
+  `;
 
-    if (sort === 'name') filtered.sort((a, b) => a.name.localeCompare(b.name));
-    else if (sort === 'newest') filtered.sort((a, b) => (b.stars||0) - (a.stars||0));
-    else filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || (b.stars||0) - (a.stars||0));
+  /* Language Distribution */
+  const sorted=Object.entries(langMap).sort((a,b)=>b[1]-a[1]).slice(0,12);
+  const maxLang=sorted[0]?sorted[0][1]:1;
+  document.getElementById('lang-bars').innerHTML=sorted.map(([lang,count])=>{
+    const color=LANG_COLORS[lang]||'#64748b';
+    const pct=Math.round(count/PROJECTS.length*100);
+    return`<div class="lang-bar"><span class="lang-bar-dot" style="background:${color}"></span>${lang} <span style="color:var(--text3);font-size:0.65rem">${count} (${pct}%)</span></div>`;
+  }).join('');
 
-    return filtered;
+  /* Top Contributors */
+  const authorMap={};
+  PROJECTS.forEach(p=>{authorMap[p.author]=(authorMap[p.author]||0)+1});
+  const topAuthors=Object.entries(authorMap).sort((a,b)=>b[1]-a[1]).slice(0,15);
+  document.getElementById('contrib-grid').innerHTML=topAuthors.map(([name,count])=>{
+    const initials=name.slice(0,2).toUpperCase();
+    return`<a class="contrib-card" href="https://github.com/${name}" target="_blank" rel="noopener">
+      <div class="contrib-avatar">${initials}</div>
+      <div class="contrib-name">@${name}</div>
+      <div class="contrib-count">${count} project${count>1?'s':''}</div>
+    </a>`;
+  }).join('');
+
+  /* Header counters */
+  animateCount(document.getElementById('h-projects'),PROJECTS.length);
+  animateCount(document.getElementById('h-categories'),catCount);
+  animateCount(document.getElementById('h-contributors'),authors.size);
+  animateCount(document.getElementById('h-stars'),totalStars);
 }
 
-function render() {
-    const filtered = getFiltered();
-    const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
-    if (currentPage > totalPages) currentPage = 1;
-    const start = (currentPage - 1) * PAGE_SIZE;
-    const page = filtered.slice(start, start + PAGE_SIZE);
-
-    const grid = document.getElementById('project-grid');
-    if (filtered.length === 0) {
-        grid.innerHTML = '<div class="empty"><div class="empty-icon">🔍</div><div>No projects found.</div></div>';
-    } else {
-        grid.innerHTML = page.map(p => {
-            const catInfo = CAT_LABELS && CAT_LABELS[p.cat] ? CAT_LABELS[p.cat] : {icon:'📦'};
-            return '<div class="card">' +
-                '<div class="card-top">' +
-                    '<div class="card-icon" style="background:var(--green-dim);color:var(--green)">' + catInfo.icon + '</div>' +
-                    '<div class="card-info">' +
-                        '<div class="card-name">' + p.name + '</div>' +
-                        '<div class="card-author">@' + p.author + '</div>' +
-                    '</div>' +
-                '</div>' +
-                '<div class="card-desc">' + p.desc + '</div>' +
-                '<div class="card-tags">' + (p.tags||[]).map(t => '<span class="tag">' + t + '</span>').join('') + '</div>' +
-                '<div class="card-footer">' +
-                    '<div class="card-meta">' +
-                        '<span>💻 ' + (p.lang || '?') + '</span>' +
-                        (p.stars > 0 ? '<span>⭐ ' + p.stars + '</span>' : '') +
-                    '</div>' +
-                    '<a class="card-link" href="' + p.url + '" target="_blank">View →</a>' +
-                '</div>' +
-            '</div>';
-        }).join('');
-
-        // Pagination
-        if (totalPages > 1) {
-            let pag = '<div style="grid-column:1/-1;display:flex;justify-content:center;gap:6px;padding:16px 0">';
-            pag += '<button class="pill" onclick="currentPage=Math.max(1,currentPage-1);render()" ' + (currentPage<=1?'disabled':'') + '>← Prev</button>';
-            pag += '<span style="padding:6px 12px;font-size:0.82rem;color:var(--text2)">Page ' + currentPage + ' of ' + totalPages + ' (' + filtered.length + ' projects)</span>';
-            pag += '<button class="pill" onclick="currentPage=Math.min('+totalPages+',currentPage+1);render()" ' + (currentPage>=totalPages?'disabled':'') + '>Next →</button>';
-            pag += '</div>';
-            grid.innerHTML += pag;
-        }
-    }
-
-    renderPills();
-
-    // Populate category filter
-    const catFilter = document.getElementById('cat-filter');
-    if (catFilter.options.length <= 1 && typeof CAT_LABELS !== 'undefined') {
-        for (const [id, info] of Object.entries(CAT_LABELS)) {
-            const count = PROJECTS.filter(p => p.cat === id).length;
-            if (count === 0) continue;
-            const opt = document.createElement('option');
-            opt.value = id;
-            opt.textContent = info.icon + ' ' + info.label + ' (' + count + ')';
-            catFilter.appendChild(opt);
-        }
-    }
+/* Populate Language Filter */
+function buildLangFilter(){
+  const langMap={};
+  PROJECTS.forEach(p=>{const l=p.lang||'Various';langMap[l]=(langMap[l]||0)+1});
+  const sorted=Object.entries(langMap).sort((a,b)=>b[1]-a[1]);
+  const sel=document.getElementById('lang-filter');
+  sorted.forEach(([lang,count])=>{
+    const opt=document.createElement('option');
+    opt.value=lang;
+    opt.textContent=`${lang} (${count})`;
+    sel.appendChild(opt);
+  });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('kwos-dark') === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        document.getElementById('dark-btn').textContent = '☀️ Light';
+/* Populate Category Filter */
+function buildCatFilter(){
+  const catFilter=document.getElementById('cat-filter');
+  if(typeof CAT_LABELS!=='undefined'){
+    for(const[id,info]of Object.entries(CAT_LABELS)){
+      const count=PROJECTS.filter(p=>p.cat===id).length;
+      if(count===0)continue;
+      const opt=document.createElement('option');
+      opt.value=id;
+      opt.textContent=`${info.icon} ${info.label} (${count})`;
+      catFilter.appendChild(opt);
     }
-    const authors = new Set(PROJECTS.map(p => p.author));
-    document.getElementById('h-projects').textContent = PROJECTS.length;
-    document.getElementById('h-categories').textContent = Object.keys(CAT_LABELS || {}).length;
-    document.getElementById('h-contributors').textContent = authors.size;
-    render();
+  }
+}
+
+/* Scroll Reveal */
+function initReveal(){
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+  },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+}
+
+/* Back to top */
+function initBackTop(){
+  const btn=document.getElementById('back-top');
+  window.addEventListener('scroll',()=>{btn.classList.toggle('show',window.scrollY>400)},{passive:true});
+}
+
+/* Keyboard shortcuts */
+document.addEventListener('keydown',e=>{
+  if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){
+    e.preventDefault();document.getElementById('search').focus();
+  }
+  if(e.key==='Escape')document.getElementById('search').blur();
+});
+
+/* Init */
+document.addEventListener('DOMContentLoaded',()=>{
+  try{
+    const savedTheme=localStorage.getItem('kwos-theme');
+    if(savedTheme){
+      document.documentElement.setAttribute('data-theme',savedTheme);
+      document.getElementById('theme-btn').textContent=savedTheme==='dark'?'☀️ Light':'🌙 Dark';
+    }
+  }catch(e){}
+  buildCatFilter();
+  buildLangFilter();
+  buildStats();
+  render();
+  initReveal();
+  initBackTop();
 });
 </script>
 </body>

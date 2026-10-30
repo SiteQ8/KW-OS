@@ -1,0 +1,118 @@
+name: Update Project Stars
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'  # Every Monday at 3 AM UTC
+  workflow_dispatch:  # Manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-stars:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Update star counts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node << 'SCRIPT'
+          const fs = require('fs');
+          const https = require('https');
+
+          function ghFetch(url) {
+            return new Promise((resolve, reject) => {
+              const opts = {
+                headers: {
+                  'User-Agent': 'KW-OS-Bot',
+                  'Accept': 'application/vnd.github.v3+json',
+                  ...(process.env.GITHUB_TOKEN ? { 'Authorization': `token ${process.env.GITHUB_TOKEN}` } : {})
+                }
+              };
+              https.get(url, opts, res => {
+                let data = '';
+                res.on('data', c => data += c);
+                res.on('end', () => {
+                  if (res.statusCode === 200) resolve(JSON.parse(data));
+                  else resolve(null);
+                });
+              }).on('error', () => resolve(null));
+            });
+          }
+
+          async function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+          async function main() {
+            const src = fs.readFileSync('docs/projects.js', 'utf-8');
+
+            // Extract PROJECTS array
+            const match = src.match(/const PROJECTS\s*=\s*(\[[\s\S]*\]);?\s*$/);
+            if (!match) { console.log('Could not parse projects.js'); process.exit(0); }
+
+            const projects = JSON.parse(match[1]);
+            let updated = 0;
+
+            for (let i = 0; i < projects.length; i++) {
+              const p = projects[i];
+              const urlMatch = p.url.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+              if (!urlMatch) continue;
+
+              const [, owner, repo] = urlMatch;
+              const data = await ghFetch(`https://api.github.com/repos/${owner}/${repo}`);
+
+              if (data && typeof data.stargazers_count === 'number') {
+                if (data.stargazers_count !== p.stars) {
+                  console.log(`${p.name}: ${p.stars} → ${data.stargazers_count}`);
+                  p.stars = data.stargazers_count;
+                  updated++;
+                }
+                // Also update description if it was a placeholder
+                if (p.desc.startsWith('Open source project by') && data.description) {
+                  p.desc = data.description;
+                  updated++;
+                }
+              }
+
+              // Rate limit: ~30 req/min for unauthenticated, 5000/hr for authenticated
+              if (i % 25 === 24) await sleep(2000);
+              else await sleep(200);
+            }
+
+            if (updated > 0) {
+              // Preserve CAT_LABELS
+              const catMatch = src.match(/(\/\/[\s\S]*?const CAT_LABELS\s*=\s*\{[^;]+\};)/);
+              const header = catMatch ? catMatch[1].replace(
+                /Last updated:.*$/m,
+                `Last updated: ${new Date().toISOString().slice(0, 10)}`
+              ) : '';
+
+              const output = header + '\n\nconst PROJECTS = ' + JSON.stringify(projects, null, 0) + ';\n';
+              fs.writeFileSync('docs/projects.js', output);
+              console.log(`Updated ${updated} field(s) across projects`);
+            } else {
+              console.log('No changes detected');
+            }
+          }
+
+          main().catch(e => { console.error(e); process.exit(1); });
+          SCRIPT
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/projects.js
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-update project stars and descriptions
+
+          Automated weekly sync via GitHub Actions"
+            git push
+          fi
