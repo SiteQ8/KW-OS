@@ -1,4 +1,4 @@
-# 🇰🇼 KW-OS — Kuwait Open Source Directory
+# KW-OS: Kuwait Open Source Directory
 
 <p align="center">
   <a href="https://siteq8.github.io/KW-OS"><img src="https://img.shields.io/badge/🚀-Live_Directory-2563eb?style=flat-square" alt="Live"/></a>
@@ -9,28 +9,28 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-gold?style=flat-square" alt="License"/></a>
 </p>
 
-A comprehensive directory of **269 open-source projects** by **177 developers** based in Kuwait. Scanned 507 GitHub users and 1,576 repositories via the GitHub API.
+A directory of **269 open-source projects** by **177 developers** based in Kuwait. Scanned 507 GitHub users and 1,576 repositories via the GitHub API.
 
 🔗 **Browse:** [https://siteq8.github.io/KW-OS](https://siteq8.github.io/KW-OS)
 
 ---
 
-## ⭐ Top Kuwait Open Source Projects
+## Top Kuwait Open Source Projects
 
 Projects with the most GitHub stars from Kuwait-based developers:
 
 | ⭐ | Project | Author | Language | Description |
 |---|---------|--------|----------|-------------|
 | 234 | [**539kernel**](https://github.com/MaaSTaaR/539kernel) | @MaaSTaaR (Mohammed Q. Hussain) | Assembly | Educational x86 32-bit operating system kernel |
-| 128 | [**CSharp-RunPE**](https://github.com/NYAN-x-CAT/CSharp-RunPE) | @NYAN-x-CAT | C# | Process hollowing — hide processes behind legit ones |
+| 128 | [**CSharp-RunPE**](https://github.com/NYAN-x-CAT/CSharp-RunPE) | @NYAN-x-CAT | C# | Process hollowing, hide processes behind legit ones |
 | 90 | [**scoutarr**](https://github.com/SuFxGIT/scoutarr) | @SuFxGIT | TypeScript | Automate media upgrades in Radarr, Sonarr, Lidarr, Readarr |
-| 60 | [**JS-Downloader**](https://github.com/NYAN-x-CAT/JS-Downloader) | @NYAN-x-CAT | JavaScript | JScript file downloader & executor — security research |
+| 60 | [**JS-Downloader**](https://github.com/NYAN-x-CAT/JS-Downloader) | @NYAN-x-CAT | JavaScript | JScript file downloader & executor, security research |
 | 57 | [**notmuch.nvim**](https://github.com/yousefakbar/notmuch.nvim) | @yousefakbar | Lua | Read/write mail offline in Neovim with Notmuch integration |
-| 52 | [**SharpShell**](https://github.com/NYAN-x-CAT/SharpShell) | @NYAN-x-CAT | C# | Shellcode injection into process memory — security research |
+| 52 | [**SharpShell**](https://github.com/NYAN-x-CAT/SharpShell) | @NYAN-x-CAT | C# | Shellcode injection into process memory, security research |
 | 41 | [**ansible-havoc**](https://github.com/smokeme/ansible-havoc) | @smokeme (Fawaz Adi) | Shell | Ansible scripts to deploy Havoc C2 with SSL & categorization |
-| 33 | [**asar-backdoor**](https://github.com/smokeme/asar-backdoor) | @smokeme (Fawaz Adi) | JavaScript | Electron ASAR archive backdoor — security research |
+| 33 | [**asar-backdoor**](https://github.com/smokeme/asar-backdoor) | @smokeme (Fawaz Adi) | JavaScript | Electron ASAR archive backdoor, security research |
 | 25 | [**LSYSFS**](https://github.com/MaaSTaaR/LSYSFS) | @MaaSTaaR (Mohammed Q. Hussain) | C | FUSE-based educational filesystem implementation |
-| 24 | [**whatseerr**](https://github.com/SuFxGIT/whatseerr) | @SuFxGIT | JavaScript | WhatsApp bot for Seerr — search & request media |
+| 24 | [**whatseerr**](https://github.com/SuFxGIT/whatseerr) | @SuFxGIT | JavaScript | WhatsApp bot for Seerr, search & request media |
 | 22 | [**android-compose-charts**](https://github.com/MahmoudIbrahim3/android-compose-charts) | @MahmoudIbrahim3 | Kotlin | Open source chart library for Android Jetpack Compose |
 | 22 | [**flutter_foundation_models**](https://github.com/dmakwt/flutter_foundation_models_framework) | @dmakwt | Swift | Flutter package for Apple's Foundation Models framework |
 | 21 | [**CSGO-Ping-Tester**](https://github.com/Weeeishy/CSGO-Ping-Tester) | @Weeeishy | Batch | Check ping on different CS:GO server regions |
@@ -53,24 +53,24 @@ Projects with the most GitHub stars from Kuwait-based developers:
 
 ---
 
-## 📊 Notable Kuwait Developers
+## Notable Kuwait Developers
 
 | Developer | Followers | Focus | Top Project |
 |-----------|-----------|-------|-------------|
 | [@MaaSTaaR](https://github.com/MaaSTaaR) (Mohammed Q. Hussain) | 70 | OS Kernels, Systems Programming | 539kernel (★234) |
 | [@smokeme](https://github.com/smokeme) (Fawaz Adi) | 147 | Cybersecurity Research, Red Team | ansible-havoc (★41) |
-| [@NYAN-x-CAT](https://github.com/NYAN-x-CAT) | — | Security Research, C# | CSharp-RunPE (★128) |
-| [@SuFxGIT](https://github.com/SuFxGIT) | — | Automation, TypeScript | scoutarr (★90) |
-| [@yousefakbar](https://github.com/yousefakbar) | — | Neovim, Go, CLI tools | notmuch.nvim (★57) |
-| [@hashemi](https://github.com/hashemi) (Ahmad Alhashemi) | — | Swift, Languages | garga — 1st KW lang (★7) |
-| [@SiteQ8](https://github.com/SiteQ8) (Ali AlEnezi) | — | Cybersecurity, Compliance, GRC | 30+ security tools |
-| [@halacoded](https://github.com/halacoded) (Hala Almutairi) | — | IoT, University Projects | Khutwa (★3) |
-| [@CITRA-kw](https://github.com/CITRA-kw) | — | Government, Telecom | NeighbourhoodWatch (★2) |
-| [@kuwaitdevs](https://github.com/kuwaitdevs) | — | Community | Kuwait Developers hub |
+| [@NYAN-x-CAT](https://github.com/NYAN-x-CAT) |: | Security Research, C# | CSharp-RunPE (★128) |
+| [@SuFxGIT](https://github.com/SuFxGIT) |: | Automation, TypeScript | scoutarr (★90) |
+| [@yousefakbar](https://github.com/yousefakbar) |: | Neovim, Go, CLI tools | notmuch.nvim (★57) |
+| [@hashemi](https://github.com/hashemi) (Ahmad Alhashemi) |: | Swift, Languages | garga, 1st KW lang (★7) |
+| [@SiteQ8](https://github.com/SiteQ8) (Ali AlEnezi) |: | Cybersecurity, Compliance, GRC | 30+ security tools |
+| [@halacoded](https://github.com/halacoded) (Hala Almutairi) |: | IoT, University Projects | Khutwa (★3) |
+| [@CITRA-kw](https://github.com/CITRA-kw) |: | Government, Telecom | NeighbourhoodWatch (★2) |
+| [@kuwaitdevs](https://github.com/kuwaitdevs) |: | Community | Kuwait Developers hub |
 
 ---
 
-## 📂 Categories
+## Categories
 
 | Category | Projects | Description |
 |----------|----------|-------------|
@@ -89,19 +89,19 @@ Projects with the most GitHub stars from Kuwait-based developers:
 
 ---
 
-## 🔍 How This Directory Was Built
+## How This Directory Was Built
 
-1. **GitHub API Search** — Found 507 users with `location:Kuwait` and 5+ repos
-2. **Repo Scan** — Fetched top repositories from every user (1,576 total)
-3. **Topic Search** — Repos tagged with `kuwait` topic
-4. **Keyword Search** — "Kuwait", "Kuwaiti", "KNET", "Boursa" in descriptions
-5. **Filtering** — Removed forks, empty repos, and duplicates
-6. **Auto-categorization** — Classified by language, keywords, and topics
-7. **Result** — 266 meaningful projects from 177 contributors
+1. **GitHub API Search**: Found 507 users with `location:Kuwait` and 5+ repos
+2. **Repo Scan**: Fetched top repositories from every user (1,576 total)
+3. **Topic Search**: Repos tagged with `kuwait` topic
+4. **Keyword Search**: "Kuwait", "Kuwaiti", "KNET", "Boursa" in descriptions
+5. **Filtering**: Removed forks, empty repos, and duplicates
+6. **Auto-categorization**: Classified by language, keywords, and topics
+7. **Result**: 266 meaningful projects from 177 contributors
 
 ---
 
-## ➕ Submit Your Project
+## Submit Your Project
 
 Are you a Kuwaiti developer with an open-source project?
 
@@ -109,13 +109,13 @@ Are you a Kuwaiti developer with an open-source project?
 
 ---
 
-## 📄 License
+## License
 
-MIT — see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE).
 
 ---
 
 <p align="center">
   <sub>🇰🇼 Open source. Open community. Open Kuwait.</sub><br>
-  <sub>Curated by <a href="https://github.com/SiteQ8">@SiteQ8</a> — Ali AlEnezi</sub>
+  <sub>Curated by <a href="https://github.com/SiteQ8">@SiteQ8</a>, Ali AlEnezi</sub>
 </p>
